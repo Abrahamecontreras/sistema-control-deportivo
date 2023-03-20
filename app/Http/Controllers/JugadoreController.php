@@ -80,7 +80,7 @@ class JugadoreController extends Controller
 
         $equipos = Equipo::pluck('nombre', 'id');
         
-        return view('jugadore.create', compact('jugadore', 'equipos'));
+        return view('jugadore.edit', compact('jugadore', 'equipos'));
     }
 
     /**
