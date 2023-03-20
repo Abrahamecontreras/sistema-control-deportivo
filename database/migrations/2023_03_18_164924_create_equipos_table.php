@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('equipos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('ligas');
+            $table->bigInteger('liga_id')->unsigned();
+            $table->foreign('liga_id')->references('id')->on('ligas')->onDelete('cascade');
             $table->string('foto');
             $table->timestamps();
         });

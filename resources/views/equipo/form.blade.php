@@ -7,9 +7,9 @@
             {!! $errors->first('nombre', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('ligas') }}
-            {{ Form::text('ligas', $equipo->ligas, ['class' => 'form-control' . ($errors->has('ligas') ? ' is-invalid' : ''), 'placeholder' => 'Ligas']) }}
-            {!! $errors->first('ligas', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('liga_id') }}
+            {{ Form::select('liga_id', $liga, $equipo->liga_id, ['class' => 'form-control' . ($errors->has('liga_id') ? ' is-invalid' : ''), 'placeholder' => 'Liga Id']) }}
+            {!! $errors->first('liga_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('foto') }}

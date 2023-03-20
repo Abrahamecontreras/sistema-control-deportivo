@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ $equipo->name ?? "{{ __('Show') Equipo" }}
+    {{ $liga->name ?? "{{ __('Show') Liga" }}
 @endsection
 
 @section('content')
@@ -11,10 +11,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Equipo</span>
+                            <span class="card-title">{{ __('Show') }} Liga</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('equipos.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ route('ligas.index') }}"> {{ __('Back') }}</a>
                         </div>
                     </div>
 
@@ -22,15 +22,23 @@
                         
                         <div class="form-group">
                             <strong>Nombre:</strong>
-                            {{ $equipo->nombre }}
+                            {{ $liga->nombre }}
                         </div>
                         <div class="form-group">
-                            <strong>Liga Id:</strong>
-                            {{ $equipo->liga_id }}
+                            <strong>Logo:</strong>
+                            {{ $liga->logo }}
                         </div>
                         <div class="form-group">
-                            <strong>Foto:</strong>
-                            {{ $equipo->foto }}
+                            <strong>Tipo:</strong>
+                            {{ $liga->tipo }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Estado:</strong>
+                            {{ $liga->estado }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Temporadas:</strong>
+                            {{ $liga->temporadas }}
                         </div>
 
                     </div>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Equipo
+    Liga
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Equipo') }}
+                                {{ __('Liga') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('equipos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('ligas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -37,25 +37,29 @@
                                         <th>No</th>
                                         
 										<th>Nombre</th>
-										<th>Liga Id</th>
-										<th>Foto</th>
+										<th>Logo</th>
+										<th>Tipo</th>
+										<th>Estado</th>
+										<th>Temporadas</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($equipos as $equipo)
+                                    @foreach ($ligas as $liga)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $equipo->nombre }}</td>
-											<td>{{ $equipo->liga->nombre }}</td>
-											<td>{{ $equipo->foto }}</td>
+											<td>{{ $liga->nombre }}</td>
+											<td>{{ $liga->logo }}</td>
+											<td>{{ $liga->tipo }}</td>
+											<td>{{ $liga->estado }}</td>
+											<td>{{ $liga->temporadas }}</td>
 
                                             <td>
-                                                <form action="{{ route('equipos.destroy',$equipo->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('equipos.show',$equipo->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('equipos.edit',$equipo->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('ligas.destroy',$liga->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('ligas.show',$liga->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('ligas.edit',$liga->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
@@ -68,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $equipos->links() !!}
+                {!! $ligas->links() !!}
             </div>
         </div>
     </div>

@@ -22,3 +22,4 @@ Route::get('/', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('jugadores', App\Http\Controllers\JugadoreController::class);
 Route::resource('equipos', App\Http\Controllers\EquipoController::class);
+Route::resource('ligas', App\Http\Controllers\LigaController::class);

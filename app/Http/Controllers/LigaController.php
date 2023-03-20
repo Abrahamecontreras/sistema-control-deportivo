@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Equipo;
 use App\Models\Liga;
 use Illuminate\Http\Request;
 
 /**
- * Class EquipoController
+ * Class LigaController
  * @package App\Http\Controllers
  */
-class EquipoController extends Controller
+class LigaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +18,10 @@ class EquipoController extends Controller
      */
     public function index()
     {
-        $equipos = Equipo::paginate();
+        $ligas = Liga::paginate();
 
-        return view('equipo.index', compact('equipos'))
-            ->with('i', (request()->input('page', 1) - 1) * $equipos->perPage());
+        return view('liga.index', compact('ligas'))
+            ->with('i', (request()->input('page', 1) - 1) * $ligas->perPage());
     }
 
     /**
@@ -32,10 +31,8 @@ class EquipoController extends Controller
      */
     public function create()
     {
-        $equipo = new Equipo();
-
-        $liga = Liga::pluck('nombre', 'id');
-        return view('equipo.create', compact('equipo', 'liga'));
+        $liga = new Liga();
+        return view('liga.create', compact('liga'));
     }
 
     /**
@@ -46,12 +43,12 @@ class EquipoController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Equipo::$rules);
+        request()->validate(Liga::$rules);
 
-        $equipo = Equipo::create($request->all());
+        $liga = Liga::create($request->all());
 
-        return redirect()->route('equipos.index')
-            ->with('success', 'Equipo created successfully.');
+        return redirect()->route('ligas.index')
+            ->with('success', 'Liga created successfully.');
     }
 
     /**
@@ -62,9 +59,9 @@ class EquipoController extends Controller
      */
     public function show($id)
     {
-        $equipo = Equipo::find($id);
+        $liga = Liga::find($id);
 
-        return view('equipo.show', compact('equipo'));
+        return view('liga.show', compact('liga'));
     }
 
     /**
@@ -75,27 +72,26 @@ class EquipoController extends Controller
      */
     public function edit($id)
     {
-        $equipo = Equipo::find($id);
+        $liga = Liga::find($id);
 
-        $liga = Liga::pluck('nombre', 'id');    
-        return view('equipo.edit', compact('equipo', 'liga'));
+        return view('liga.edit', compact('liga'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  Equipo $equipo
+     * @param  Liga $liga
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Equipo $equipo)
+    public function update(Request $request, Liga $liga)
     {
-        request()->validate(Equipo::$rules);
+        request()->validate(Liga::$rules);
 
-        $equipo->update($request->all());
+        $liga->update($request->all());
 
-        return redirect()->route('equipos.index')
-            ->with('success', 'Equipo updated successfully');
+        return redirect()->route('ligas.index')
+            ->with('success', 'Liga updated successfully');
     }
 
     /**
@@ -105,9 +101,9 @@ class EquipoController extends Controller
      */
     public function destroy($id)
     {
-        $equipo = Equipo::find($id)->delete();
+        $liga = Liga::find($id)->delete();
 
-        return redirect()->route('equipos.index')
-            ->with('success', 'Equipo deleted successfully');
+        return redirect()->route('ligas.index')
+            ->with('success', 'Liga deleted successfully');
     }
 }
