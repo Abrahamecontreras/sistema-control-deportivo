@@ -50,7 +50,11 @@
                                             
 											<td>{{ $equipo->nombre }}</td>
 											<td>{{ $equipo->liga->nombre }}</td>
-											<td>{{ $equipo->foto }}</td>
+
+											<td>
+                                                <img class="img-thumbnail img-fluid" src="{{ asset('storage/uploads') . '/' . $equipo->foto }}"
+                                                width="100px" height="100px" alt="">                                            
+                                            </td>
 
                                             <td>
                                                 <form action="{{ route('equipos.destroy',$equipo->id) }}" method="POST">

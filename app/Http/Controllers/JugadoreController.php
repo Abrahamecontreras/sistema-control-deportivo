@@ -49,7 +49,18 @@ class JugadoreController extends Controller
     {
         request()->validate(Jugadore::$rules);
 
-        $jugadore = Jugadore::create($request->all());
+        request()->validate(Jugadore::$rules);
+        $data = $request->all();
+        if ($request->hasFile('foto')) {
+            $destination_path = 'public/uploads';
+            $imagen = $request->file('foto');
+            $img_name = $imagen->getClientOriginalName();
+            $path = $request->file('foto')->storeAs($destination_path, $img_name);
+            $data['foto'] = $img_name;
+        }
+
+
+        $jugadore = Jugadore::create($data);
 
         return redirect()->route('jugadores.index')
             ->with('success', 'Jugador creado exitosamente.');
@@ -76,7 +87,7 @@ class JugadoreController extends Controller
      */
     public function edit($id)
     {
-        $jugadore = Jugadore::find($id);
+        $jugadore = Jugadore::findOrFail($id);
 
         $equipos = Equipo::pluck('nombre', 'id');
         
@@ -92,9 +103,18 @@ class JugadoreController extends Controller
      */
     public function update(Request $request, Jugadore $jugadore)
     {
-        request()->validate(Jugadore::$rules);
+        request()->validate(Jugadore::$rulesEdit);
+        $data = $request->all();
+        if ($request->hasFile('foto')) {
+            $destination_path = 'public/uploads';
+            $imagen = $request->file('foto');
+            $img_name = $imagen->getClientOriginalName();
+            $path = $request->file('foto')->storeAs($destination_path, $img_name);
+            $data['foto'] = $img_name;
+        }
 
-        $jugadore->update($request->all());
+
+        $jugadore->update($data);
 
         return redirect()->route('jugadores.index')
             ->with('success', 'Jugador actualizado exitosamente');

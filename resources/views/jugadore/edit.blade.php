@@ -20,7 +20,7 @@
                             {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('jugadore.form')
+                            @include('jugadore.formEdit')
 
                         </form>
                     </div>

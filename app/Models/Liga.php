@@ -31,6 +31,13 @@ class Liga extends Model
 		'temporadas' => 'required',
     ];
 
+
+    static $rulesEdit = [
+      'nombre' => 'required',
+      'tipo' => 'required',
+      'estado' => 'required',
+      'temporadas' => 'required',
+      ];
     protected $perPage = 20;
 
     /**

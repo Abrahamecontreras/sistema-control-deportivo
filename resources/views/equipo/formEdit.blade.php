@@ -11,9 +11,10 @@
             {{ Form::select('liga_id', $liga, $equipo->liga_id, ['class' => 'form-control' . ($errors->has('liga_id') ? ' is-invalid' : ''), 'placeholder' => 'Liga Id']) }}
             {!! $errors->first('liga_id', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+        {{$equipo->foto}}
         <div class="form-group">
             {{ Form::label('foto') }}
-            {{ Form::file('foto', $equipo->foto, ['class' => 'form-control-file' . ($errors->has('foto') ? ' is-invalid' : ''), 'placeholder' => 'Foto', 'name' => 'foto']) }}
+            {{ Form::file('foto', ['class' => 'form-control-file' . ($errors->has('foto') ? ' is-invalid' : ''), 'placeholder' => 'Foto', 'name' => 'foto']) }}
             {!! $errors->first('foto', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 

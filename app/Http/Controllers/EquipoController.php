@@ -34,6 +34,8 @@ class EquipoController extends Controller
     {
         $equipo = new Equipo();
 
+        //$image->storeAs('foto', $imageName);
+
         $liga = Liga::pluck('nombre', 'id');
         return view('equipo.create', compact('equipo', 'liga'));
     }
@@ -47,8 +49,16 @@ class EquipoController extends Controller
     public function store(Request $request)
     {
         request()->validate(Equipo::$rules);
+        $data = $request->all();
+        if ($request->hasFile('foto')) {
+            $destination_path = 'public/uploads';
+            $imagen = $request->file('foto');
+            $img_name = $imagen->getClientOriginalName();
+            $path = $request->file('foto')->storeAs($destination_path, $img_name);
+            $data['foto'] = $img_name;
+        }
 
-        $equipo = Equipo::create($request->all());
+        $equipo = Equipo::create($data);
 
         return redirect()->route('equipos.index')
             ->with('success', 'Equipo created successfully.');
@@ -75,7 +85,7 @@ class EquipoController extends Controller
      */
     public function edit($id)
     {
-        $equipo = Equipo::find($id);
+        $equipo = Equipo::findOrFail($id);
 
         $liga = Liga::pluck('nombre', 'id');    
         return view('equipo.edit', compact('equipo', 'liga'));
@@ -90,9 +100,20 @@ class EquipoController extends Controller
      */
     public function update(Request $request, Equipo $equipo)
     {
-        request()->validate(Equipo::$rules);
+        
+        request()->validate(Equipo::$rulesEdit);
+        $data = $request->all();
+        if ($request->hasFile('foto')) {
+            $destination_path = 'public/uploads';
+            $imagen = $request->file('foto');
+            $img_name = $imagen->getClientOriginalName();
+            $path = $request->file('foto')->storeAs($destination_path, $img_name);
+            $data['foto'] = $img_name;
+        }
 
-        $equipo->update($request->all());
+            $equipo->update($data);
+
+       
 
         return redirect()->route('equipos.index')
             ->with('success', 'Equipo updated successfully');

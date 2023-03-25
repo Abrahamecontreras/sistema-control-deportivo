@@ -28,6 +28,11 @@ class Equipo extends Model
 		'foto' => 'required',
     ];
 
+    
+    static $rulesEdit = [
+		'nombre' => 'required',
+		'liga_id' => 'required',
+    ];
     protected $perPage = 20;
 
     /**

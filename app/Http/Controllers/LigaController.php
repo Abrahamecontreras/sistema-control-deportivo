@@ -44,8 +44,16 @@ class LigaController extends Controller
     public function store(Request $request)
     {
         request()->validate(Liga::$rules);
+        $data = $request->all();
+        if ($request->hasFile('logo')) {
+            $destination_path = 'public/uploads';
+            $imagen = $request->file('logo');
+            $img_name = $imagen->getClientOriginalName();
+            $path = $request->file('logo')->storeAs($destination_path, $img_name);
+            $data['logo'] = $img_name;
+        }    
 
-        $liga = Liga::create($request->all());
+        $liga = Liga::create($data);
 
         return redirect()->route('ligas.index')
             ->with('success', 'Liga created successfully.');
@@ -72,7 +80,7 @@ class LigaController extends Controller
      */
     public function edit($id)
     {
-        $liga = Liga::find($id);
+        $liga = Liga::findOrFail($id);
 
         return view('liga.edit', compact('liga'));
     }
@@ -86,9 +94,17 @@ class LigaController extends Controller
      */
     public function update(Request $request, Liga $liga)
     {
-        request()->validate(Liga::$rules);
+        request()->validate(Liga::$rulesEdit);
+        $data = $request->all();
+        if ($request->hasFile('logo')) {
+            $destination_path = 'public/uploads';
+            $imagen = $request->file('logo');
+            $img_name = $imagen->getClientOriginalName();
+            $path = $request->file('logo')->storeAs($destination_path, $img_name);
+            $data['logo'] = $img_name;
+        }
 
-        $liga->update($request->all());
+        $liga->update($data);
 
         return redirect()->route('ligas.index')
             ->with('success', 'Liga updated successfully');

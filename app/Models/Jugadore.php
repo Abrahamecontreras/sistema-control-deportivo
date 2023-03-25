@@ -22,34 +22,39 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Jugadore extends Model
 {
-    
-    static $rules = [
-		'nombre' => 'required',
-		'equipo_id' => 'required',
-		'num_playera' => 'required',
-		'posicion' => 'required',
-		'foto' => 'required',
-    ];
 
-  
+  static $rules = [
+    'nombre' => 'required',
+    'equipo_id' => 'required',
+    'num_playera' => 'required',
+    'posicion' => 'required',
+    'foto' => 'required',
+  ];
 
-    protected $perPage = 20;
-
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['nombre','equipo_id','num_playera','posicion','foto'];
+  static $rulesEdit = [
+    'nombre' => 'required',
+    'equipo_id' => 'required',
+    'num_playera' => 'required',
+    'posicion' => 'required',
+  ];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function equipo()
-    {
-        return $this->hasOne('App\Models\Equipo', 'id', 'equipo_id');
-    }
-    
 
+  protected $perPage = 20;
+
+  /**
+   * Attributes that should be mass-assignable.
+   *
+   * @var array
+   */
+  protected $fillable = ['nombre', 'equipo_id', 'num_playera', 'posicion', 'foto'];
+
+
+  /**
+   * @return \Illuminate\Database\Eloquent\Relations\HasOne
+   */
+  public function equipo()
+  {
+    return $this->hasOne('App\Models\Equipo', 'id', 'equipo_id');
+  }
 }

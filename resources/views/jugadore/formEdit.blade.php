@@ -21,10 +21,10 @@
             {{ Form::text('posicion', $jugadore->posicion, ['class' => 'form-control' . ($errors->has('posicion') ? ' is-invalid' : ''), 'placeholder' => 'Posicion']) }}
             {!! $errors->first('posicion', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        <br>
+        {{$jugadore->foto}}
         <div class="form-group">
             {{ Form::label('foto') }}
-            {{ Form::file('foto', $jugadore->foto, ['class' => 'form-control' . ($errors->has('foto') ? ' is-invalid' : ''), 'placeholder' => 'Foto']) }}
+            {{ Form::file('foto',['class' => 'form-control-file' . ($errors->has('foto') ? ' is-invalid' : ''), 'placeholder' => 'Foto', 'name' => 'foto']) }}
             {!! $errors->first('foto', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <br>

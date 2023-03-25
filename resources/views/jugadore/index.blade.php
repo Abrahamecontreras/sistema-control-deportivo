@@ -56,7 +56,10 @@
 											<td>{{ $jugadore->equipo->nombre }}</td>
 											<td>{{ $jugadore->num_playera }}</td>
 											<td>{{ $jugadore->posicion }}</td>
-											<td>{{ $jugadore->foto }}</td>
+
+											<td><img class="img-thumbnail img-fluid" src="{{ asset('storage/uploads') . '/' . $jugadore->foto }}"
+                                                width="100px"  alt="">
+                                                </td>
 
                                             <td>
                                                 <form action="{{ route('jugadores.destroy',$jugadore->id) }}" method="POST">

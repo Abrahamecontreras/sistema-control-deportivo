@@ -8,7 +8,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('logo') }}
-            {{ Form::file('logo', $liga->logo, ['class' => 'form-control' . ($errors->has('logo') ? ' is-invalid' : ''), 'placeholder' => 'Logo', 'name' => 'logo']) }}
+            {{ Form::file('logo', ['class' => 'form-control' . ($errors->has('logo') ? ' is-invalid' : ''), 'placeholder' => 'Logo', 'name' => 'logo']) }}
             {!! $errors->first('logo', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
